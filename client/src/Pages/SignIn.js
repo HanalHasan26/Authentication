@@ -47,7 +47,7 @@ function SignIn() {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data.isError === false) {
           dispatch(
             loginSuccess({
               ...res.data,
@@ -55,6 +55,9 @@ function SignIn() {
               isAuth: true,
             })
           );
+          console.log(res.data.message);
+          console.log(res.data.isError);
+          console.log(res.data);
           setIsloading(false);
           navigate("/home");
           setState({
@@ -63,7 +66,10 @@ function SignIn() {
             vertical: "top",
             horizontal: "center",
           });
-
+        } else {
+          alert(res.data.message);
+          setIsloading(false);
+        }
       });
   };
   //   console.log(watch());

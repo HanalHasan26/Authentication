@@ -27,7 +27,7 @@ function App() {
         }
       >
         <Router>
-          <Header />
+          <Header /> 
           <Switch>
             {data.isAuth && data.access ? (
               <Route path="/*" element={<Navigation />} />

@@ -31,17 +31,42 @@ function Signup() {
       },
   }
 
-  axios.post('/api/user', {name,email,password},config).then((res) => {
-        console.log("response",res.data);
-        navigate("/")
 
-          alert(res.data.message);
-          navigate("/signin");
-          console.log("response",res.data.message);
-          setIsloading(false);
+//   axios.post('/api/user', {name,email,password},config).then((res) => {
+//     console.log("response",res.data);
+//     navigate("/")
 
-      });
-  };
+//       alert(res.data.message);
+//       navigate("/signin");
+//       console.log("response",res.data.message);
+//       setIsloading(false);
+
+//   });
+// };
+
+
+  await axios
+  .post('/api/user/', {
+    name,
+    email,
+    password,
+  },config)
+
+  .then((res) => {
+    console.log("response",res.data);
+
+    if (res.data.isError === false) {
+      alert(res.data.message);
+      navigate("/signin");
+      console.log("response",res.data.message);
+      setIsloading(false);
+    } else {
+      alert(res.data.message);
+      console.log("erorrrrr",res.data.message);
+      setIsloading(false);
+    }
+  });
+};
   //   console.log(watch());
   return (
     <Container>
